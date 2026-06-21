@@ -1,0 +1,150 @@
+.img-fluid{
+    width: 100%;
+}
+/* Hero Section Styles */
+.hero-wrapper {
+  position: relative;
+  width: 100%;
+  height: 500px;
+
+}
+
+.hero-section-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+.hero-section-img.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.hero-section-img:not(.active) {
+  transform: scale(1.1);
+}
+
+/* Hero section wrapper */
+.hero-section-wrapper {
+  display: flex;
+  max-width: 95%;
+  gap: 10px;
+  align-items: center;
+  transition: all 0.5s ease-in-out;
+}
+
+/* Left column */
+.left-col {
+  flex: 1;
+  padding: 0;
+}
+
+/* Right column */
+.right-col {
+  flex: 1;
+  padding: 40px;
+
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+
+}
+
+/* Text styles */
+.hero-section-text h1 {
+  font-size: 50px;
+  font-weight: 900;
+  letter-spacing: 15px;
+  margin-bottom: 20px;
+  color: #ed3445;
+  text-shadow: 2px 2px 4px rgba(237, 52, 69, 0.2);
+}
+
+.hero-section-text strong {
+  font-size: 24px;
+  display: block;
+  color: #333;
+}
+
+.hero-section-text .text-small {
+  font-size: 15px;
+
+text-align: justify;
+  color: #666;
+  display: block;
+}
+
+/* Gradient effects */
+.gradient-section h1 {
+  background: linear-gradient(135deg, #ed3445, #ff6b6b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+.text-gradient-active h1 {
+  background: linear-gradient(135deg, #ff7e5f, #feb47b, #ff6b6b);
+  background-size: 200% 200%;
+  animation: gradientShift 2s ease infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-active strong {
+  background: linear-gradient(to right, #333, #ff7e5f);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-active .text-small {
+  background: linear-gradient(to right, #666, #feb47b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Animations */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+/* Hover effects */
+.hero-wrapper:hover .hero-section-img.active {
+  transform: scale(1.02);
+}
+
+/* Image indicators */
+.hero-indicators {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.hero-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: 2px solid white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hero-indicator.active {
+  background: white;
+  transform: scale(1.3);
+}

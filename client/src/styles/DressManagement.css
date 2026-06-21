@@ -1,0 +1,88 @@
+.dress-management {
+   text-align: center;
+   width: 98%;
+}
+.dress-management h1{
+    color: #ed3545;
+}
+.dress-management h6{
+    color: #ed3545;
+    text-decoration: underline;
+}
+label{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+input:active, input:focus, input:focus:active, textarea:active, textarea:focus, textarea:focus:active {
+    border-color: #ed3545;
+}
+input:hover, textarea:hover {
+    border-color: #ed3545;
+}
+textarea{
+    width: 300px;
+}
+.dress-management .submit-btn{
+    background-color: #ed3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+.dress-management .submit-btn:hover {
+    background-color: #c0392b;
+}
+.dress-management .cancel-btn{
+    background-color: #bdc3c7;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+.dress-management .cancel-btn:hover {
+    background-color: #95a5a6;
+}
+/* Ensure the container has a limit or handles overflow */
+.dress-table {
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* 1. Standard Scrollbar Styling (Firefox) */
+.dress-table {
+  scrollbar-width: thin;
+  scrollbar-color: #ed3545 transparent; /* Thumb color | Track color */
+}
+
+/* 2. Webkit Browsers (Chrome, Safari, Edge) */
+.dress-table::-webkit-scrollbar {
+  height: 6px; /* Height of the horizontal bar */
+}
+
+.dress-table::-webkit-scrollbar-track {
+  background: transparent; /* Makes the track invisible until interaction */
+}
+
+.dress-table::-webkit-scrollbar-thumb {
+  background-color: #adb5bd; /* Bootstrap grey-500 */
+  border-radius: 10px;
+  border: 1px solid transparent; /* Gives it some breathing room */
+}
+
+/* "Mutable" Effect: Darken the scrollbar when user interacts with the table */
+.dress-table:hover::-webkit-scrollbar-thumb {
+  background-color: #6c757d; /* Bootstrap secondary color */
+}
+.dress-table td{
+    border: 1px solid #dee2e6;
+    padding: 20px;
+    text-align: center;
+}
+img{
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
