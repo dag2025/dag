@@ -1,9 +1,10 @@
 {
   "name": "dag-server",
   "type": "module",
- "scripts": {
+  "scripts": {
+    "start": "node app.js",
     "dev": "nodemon app.js",
-    "start": "node app.js"   
+    "production": "NODE_ENV=production node app.js"
   },
   "keywords": [],
   "author": "",
@@ -13,17 +14,22 @@
     "bcryptjs": "^3.0.3",
     "cloudinary": "^2.9.0",
     "colorthief": "^3.3.1",
+    "compression": "^1.8.1",
     "cors": "^2.8.6",
     "dotenv": "^17.2.4",
     "express": "^5.2.1",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^8.5.2",
+    "helmet": "^8.2.0",
+    "hpp": "^0.2.3",
     "jsonwebtoken": "^9.0.3",
     "mathjs": "^15.1.1",
-    "mongoose": "^9.1.6",
+    "mongoose": "^9.7.2",
     "multer": "^2.0.2",
     "nodemailer": "^8.0.1",
     "razorpay": "^2.9.6",
-     "sharp": "^0.33.0"
-   
+    "sharp": "^0.33.0",
+    "xss-clean": "^0.1.4"
   },
   "devDependencies": {
     "nodemon": "^3.1.11"
