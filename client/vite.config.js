@@ -1,8 +1,16 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import path from 'path'; // 1. Add this import at the top
 
 export default defineConfig({
   plugins: [react()],
+  resolve: {
+    alias: {
+      // 2. Add this alias to force-map react to your project's local folder
+      'react': path.resolve(__dirname, './node_modules/react'),
+      'react-dom': path.resolve(__dirname, './node_modules/react-dom')
+    }
+  },
   server: {
     port: 3000,
     proxy: {
@@ -15,15 +23,7 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: false,
-     cssMinify: 'esbuild',
-    rollupOptions: {
-      external: [], // Don't externalize anything
-      resolve: {
-        dedupe: ['react', 'react-dom'] // Ensure single React instance
-      }
-    }
+    cssMinify: 'esbuild',
+    chunkSizeWarningLimit: 1000,
   },
-  resolve: {
-    dedupe: ['react', 'react-dom', 'react-bootstrap']
-  }
 });
