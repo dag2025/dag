@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 import axios from 'axios';
-
+import API_BASE_URL from '../Config/Api';
 const CheckoutContext = createContext();
 
 export const useCheckout = () => {
@@ -30,7 +30,7 @@ export const CheckoutProvider = ({ children }) => {
   // Address management functions
   const fetchAddresses = async (token) => {
     try {
-      const res = await axios.get('http://localhost:5000/api/orders/addresses', {
+      const res = await axios.get(`${API_BASE_URL}/orders/addresses`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (res.data.success) {

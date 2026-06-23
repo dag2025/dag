@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import axios from "axios";
 import "../../styles/DressManagement.css";
-
+import API_BASE_URL from "../../Config/Api";
 const DressManagement = React.memo(() => {
   // ------------------ STATES ------------------
   const [activeView, setActiveView] = useState("catalog"); // "catalog", "add", "edit"
@@ -45,7 +45,7 @@ const DressManagement = React.memo(() => {
   const fetchDresses = useCallback(async () => {
     setIsLoadingDresses(true);
     try {
-      const response = await axios.get("http://localhost:5000/api/dresses");
+      const response = await axios.get(`${API_BASE_URL}/dresses`);
       setDresses(response.data.dresses || []);
     } catch (error) {
       console.error("Error fetching dresses:", error);
@@ -128,7 +128,7 @@ const DressManagement = React.memo(() => {
     if (!window.confirm(`Delete "${name}"? This cannot be undone.`)) return;
     setLoading(true);
     try {
-      await axios.delete(`http://localhost:5000/api/dresses/${id}`);
+      await axios.delete(`${API_BASE_URL}/dresses/${id}`);
       setDresses(prev => prev.filter(d => d._id !== id));
       showSuccessModal("Dress deleted successfully!");
     } catch (error) {
@@ -154,11 +154,11 @@ const DressManagement = React.memo(() => {
 
       let response;
       if (activeView === "edit") {
-        response = await axios.put(`http://localhost:5000/api/dresses/${editId}`, formData, {
+        response = await axios.put(`${API_BASE_URL}/dresses/${editId}`, formData, {
           headers: { "Content-Type": "multipart/form-data" }
         });
       } else {
-        response = await axios.post("http://localhost:5000/api/dresses", formData, {
+        response = await axios.post(`${API_BASE_URL}/dresses`, formData, {
           headers: { "Content-Type": "multipart/form-data" }
         });
       }

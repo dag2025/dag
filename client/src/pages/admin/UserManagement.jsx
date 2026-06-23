@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import axios from 'axios';
-
+import API_BASE_URL from '../../Config/Api';
 function UserManagement() {
   const { user,token } = useAuth();
   const [users, setUsers] = useState([]);
@@ -32,7 +32,7 @@ function UserManagement() {
       setLoading(true);
       console.log('🔍 Fetching users...');
       
-      const res = await axios.get('http://localhost:5000/api/admin/users', {
+      const res = await axios.get(`${API_BASE_URL}/admin/users`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -57,7 +57,7 @@ function UserManagement() {
       setReviewsLoading(true);
       console.log(`🔍 Fetching reviews for user: ${userId}`);
       
-      const res = await axios.get(`http://localhost:5000/api/admin/users/${userId}/reviews`, {
+      const res = await axios.get(`${API_BASE_URL}/admin/users/${userId}/reviews`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       

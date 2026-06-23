@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useCheckout } from '../../context/CheckoutContext';
 import axios from 'axios';
-
+import API_BASE_URL from '../../Config/Api';
 const AddressSection = () => {
   const { user, token } = useAuth();
   const { 
@@ -19,7 +19,7 @@ const AddressSection = () => {
   const fetchAddresses = async () => {
     try {
       console.log('Fetching addresses with token:', token);
-      const res = await axios.get('http://localhost:5000/api/orders/addresses', {
+      const res = await axios.get(`${API_BASE_URL}/orders/addresses`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       console.log('Addresses response:', res.data);
@@ -37,7 +37,7 @@ const AddressSection = () => {
   const handleAddAddress = async () => {
     try {
       console.log('Adding address:', newAddress);
-      const res = await axios.post('http://localhost:5000/api/orders/addresses', newAddress, {
+      const res = await axios.post(`${API_BASE_URL}/orders/addresses`, newAddress, {
         headers: { Authorization: `Bearer ${token}` }
       });
       console.log('Add address response:', res.data);
@@ -55,7 +55,7 @@ const AddressSection = () => {
   const handleUpdateAddress = async () => {
     try {
       console.log('Updating address:', editingAddressId, newAddress);
-      const res = await axios.put(`http://localhost:5000/api/orders/addresses/${editingAddressId}`, newAddress, {
+      const res = await axios.put(`${API_BASE_URL}/orders/addresses/${editingAddressId}`, newAddress, {
         headers: { Authorization: `Bearer ${token}` }
       });
       console.log('Update address response:', res.data);
@@ -75,7 +75,7 @@ const AddressSection = () => {
     if (!window.confirm('Are you sure you want to delete this address?')) return;
     try {
       console.log('Deleting address:', addressId);
-      await axios.delete(`http://localhost:5000/api/orders/addresses/${addressId}`, {
+      await axios.delete(`${API_BASE_URL}/orders/addresses/${addressId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       // Refresh addresses from database

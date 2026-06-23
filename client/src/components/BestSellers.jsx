@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import API_BASE_URL from '../Config/Api';
 const BestSellers = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,8 +15,8 @@ const BestSellers = () => {
     try {
       setLoading(true);
       const [dressesRes, jewelleryRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/dresses'),
-        axios.get('http://localhost:5000/api/jewellery')
+        axios.get(`${API_BASE_URL}/dresses`),
+        axios.get(`${API_BASE_URL}/jewellery`)
       ]);
 
       // Combine and sort by views/popularity (mock implementation)

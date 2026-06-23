@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import API_BASE_URL from '../Config/Api';
 function ImageAd() {
   const [ads, setAds] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -53,7 +53,7 @@ function ImageAd() {
   const fetchImageAds = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/ads');
+      const response = await axios.get(`${API_BASE_URL}/ads`);
       if (response.data.success) {
         const imageAds = response.data.ads.filter(ad => ad.mediaType === 'image');
         setAds(imageAds);

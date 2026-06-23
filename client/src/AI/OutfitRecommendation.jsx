@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
+import API_BASE_URL from '../Config/Api';
 
 const OutfitRecommendations = ({ occasion, season }) => {
   const { isAuthenticated, token } = useAuth();
@@ -17,7 +18,7 @@ const OutfitRecommendations = ({ occasion, season }) => {
   const fetchRecommendations = async () => {
     setLoading(true);
     try {
-      const res = await axios.get('http://localhost:5000/api/recommend/outfit', {
+      const res = await axios.get(`${API_BASE_URL}/recommend/outfit`, {
         params: { occasion, season },
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -34,7 +35,7 @@ const OutfitRecommendations = ({ occasion, season }) => {
 
   const sendFeedback = async (outfit, action) => {
     try {
-      await axios.post('http://localhost:5000/api/recommend/feedback', 
+      await axios.post(`${API_BASE_URL}/recommend/feedback`, 
         { dressId: outfit.dress._id, jewelId: outfit.jewel._id, action },
         { headers: { Authorization: `Bearer ${token}` } }
       );

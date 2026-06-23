@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import axios from 'axios';
 
+import API_BASE_URL from '../../Config/Api';
+
 function Review({ productType, productId }) {
   const { isAuthenticated, user } = useAuth();
   const [isVisible, setIsVisible] = useState(false);
@@ -34,7 +36,7 @@ function Review({ productType, productId }) {
     try {
       setLoading(true);
       const response = await axios.get(
-        `http://localhost:5000/api/reviews/${productType}/${productId}`
+        `${API_BASE_URL}/reviews/${productType}/${productId}`
       );
       
       if (response.data.success) {
@@ -52,7 +54,7 @@ function Review({ productType, productId }) {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.get(
-        `http://localhost:5000/api/reviews/user/${productType}/${productId}`,
+        `${API_BASE_URL}/reviews/user/${productType}/${productId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       
@@ -95,7 +97,7 @@ function Review({ productType, productId }) {
       if (userReview) {
         // Update existing review
         const response = await axios.put(
-          `http://localhost:5000/api/reviews/${userReview._id}`,
+          `${API_BASE_URL}/reviews/${userReview._id}`,
           {
             rating: formData.rating,
             comment: formData.comment
@@ -110,7 +112,7 @@ function Review({ productType, productId }) {
       } else {
         // Add new review
         const response = await axios.post(
-          'http://localhost:5000/api/reviews',
+          `${API_BASE_URL}/reviews`,
           {
             productType,
             productId,
@@ -144,7 +146,7 @@ function Review({ productType, productId }) {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.delete(
-        `http://localhost:5000/api/reviews/${reviewId}`,
+        `${API_BASE_URL}/reviews/${reviewId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       

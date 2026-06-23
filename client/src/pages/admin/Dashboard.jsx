@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import axios from 'axios';
 import '../../styles/Dashboard.css';
-
+import API_BASE_URL from '../../Config/Api';
 function Dashboard() {
   const { token } = useAuth();
   const [loading, setLoading] = useState(true);
@@ -36,15 +36,15 @@ function Dashboard() {
       
       // Fetch all data in parallel
       const [ordersRes, usersRes, dressesRes, jewelleryRes, adsRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/admin/orders', {
+        axios.get(`${API_BASE_URL}/admin/orders`, {
           headers: { Authorization: `Bearer ${token}` }
         }),
-        axios.get('http://localhost:5000/api/admin/users', {
+        axios.get(`${API_BASE_URL}/admin/users`, {
           headers: { Authorization: `Bearer ${token}` }
         }),
-        axios.get('http://localhost:5000/api/dresses'),
-        axios.get('http://localhost:5000/api/jewellery'),
-        axios.get('http://localhost:5000/api/ads')
+        axios.get(`${API_BASE_URL}/dresses`),
+        axios.get(`${API_BASE_URL}/jewellery`),
+        axios.get(`${API_BASE_URL}/ads`)
       ]);
 
       // Process orders data

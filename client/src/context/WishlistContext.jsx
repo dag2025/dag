@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from './AuthContext';
-
+import API_BASE_URL from '../Config/Api';
 const WishlistContext = createContext(null);
 
 export const WishlistProvider = ({ children }) => {
@@ -22,7 +22,7 @@ export const WishlistProvider = ({ children }) => {
   const fetchWishlist = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/wishlist', {
+      const response = await axios.get(`${API_BASE_URL}/wishlist`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       
@@ -39,7 +39,7 @@ export const WishlistProvider = ({ children }) => {
 
   const addToWishlist = async (productType, productId) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/wishlist/add', 
+      const response = await axios.post(`${API_BASE_URL}/wishlist/add`, 
         { productType, productId },
         { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
       );
@@ -60,7 +60,7 @@ export const WishlistProvider = ({ children }) => {
 
   const removeFromWishlist = async (itemId) => {
     try {
-      const response = await axios.delete(`http://localhost:5000/api/wishlist/remove/${itemId}`, {
+      const response = await axios.delete(`${API_BASE_URL}/wishlist/remove/${itemId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       
@@ -78,7 +78,7 @@ export const WishlistProvider = ({ children }) => {
   const checkInWishlist = async (productType, productId) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/wishlist/check/${productType}/${productId}`,
+        `${API_BASE_URL}/wishlist/check/${productType}/${productId}`,
         { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
       );
       

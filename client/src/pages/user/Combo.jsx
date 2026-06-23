@@ -6,6 +6,8 @@ import giftbanner from '../../assets/gift-banner.svg';
 import axios from 'axios';
 import '../../styles/Combo.css';
 
+import API_BASE_URL from "../../Config/Api";
+
 function Combo() {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
@@ -52,8 +54,8 @@ function Combo() {
       for (const item of items) {
         try {
           const endpoint = item.productType === 'dress' 
-            ? `http://localhost:5000/api/dresses/${item.productId}`
-            : `http://localhost:5000/api/jewellery/${item.productId}`;
+            ? `${API_BASE_URL}/dresses/${item.productId}`
+            : `${API_BASE_URL}/jewellery/${item.productId}`;
           const response = await axios.get(endpoint);
           if (response.data.success) {
             const product = response.data.dress || response.data.jewellery;
@@ -79,8 +81,8 @@ function Combo() {
     try {
       setLoading(true);
       const [dressesRes, jewelleryRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/dresses'),
-        axios.get('http://localhost:5000/api/jewellery')
+        axios.get(`${API_BASE_URL}/dresses`),
+        axios.get(`${API_BASE_URL}/jewellery`)
       ]);
       
       const allProducts = [
@@ -103,7 +105,7 @@ function Combo() {
   const fetchCombo = async (type) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`http://localhost:5000/api/combo/${type}`, {
+      const response = await axios.get(`${API_BASE_URL}/combo/${type}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -139,7 +141,7 @@ function Combo() {
       setUpdatingId(product._id);
       const token = localStorage.getItem('token');
       const response = await axios.post(
-        `http://localhost:5000/api/combo/add/${type}`,
+        `${API_BASE_URL}/combo/add/${type}`,
         {
           productType: product.type,
           productId: product._id,
@@ -176,7 +178,7 @@ function Combo() {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.delete(
-        `http://localhost:5000/api/combo/remove/${comboData._id}/${item._id}`,
+        `${API_BASE_URL}/combo/remove/${comboData._id}/${item._id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -199,7 +201,7 @@ function Combo() {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.put(
-        `http://localhost:5000/api/combo/update/${comboData._id}/${item._id}`,
+        `${API_BASE_URL}/combo/update/${comboData._id}/${item._id}`,
         { quantity: newQuantity },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -221,7 +223,7 @@ function Combo() {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.put(
-        `http://localhost:5000/api/combo/update/${comboData._id}/${item._id}`,
+        `${API_BASE_URL}/combo/update/${comboData._id}/${item._id}`,
         { selectedSize: newSize },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -245,7 +247,7 @@ function Combo() {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.delete(
-        `http://localhost:5000/api/combo/clear/${comboData._id}`,
+        `${API_BASE_URL}/combo/clear/${comboData._id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -298,7 +300,7 @@ function Combo() {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.put(
-        `http://localhost:5000/api/combo/gift/${gift._id}`,
+        `${API_BASE_URL}/combo/gift/${gift._id}`,
         {
           message: giftMessage,
           recipientName,

@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import CategoryBanner from '../../assets/category-banner.svg';
 
+import API_BASE_URL from '../../Config/Api';
+
 function Category() {
   const [activeTab, setActiveTab] = useState(null);
   const [products, setProducts] = useState([]);
@@ -22,8 +24,8 @@ function Category() {
   const fetchAllCategories = async () => {
     try {
       const [dressesRes, jewelleryRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/dresses'),
-        axios.get('http://localhost:5000/api/jewellery')
+        axios.get(`${API_BASE_URL}/dresses`),
+        axios.get(`${API_BASE_URL}/jewellery`)
       ]);
       const dressCats = [...new Set((dressesRes.data.dresses || []).map(d => d.category).filter(Boolean).map(c => c.trim()))].sort();
       const jewelCats = [...new Set((jewelleryRes.data.jewellery || []).map(j => j.category).filter(Boolean).map(c => c.trim()))].sort();
@@ -47,8 +49,8 @@ function Category() {
     setLoading(true);
     try {
       const [dressesRes, jewelleryRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/dresses'),
-        axios.get('http://localhost:5000/api/jewellery')
+        axios.get(`${API_BASE_URL}/dresses`),
+        axios.get(`${API_BASE_URL}/jewellery`)
       ]);
       const allProducts = [
         ...(dressesRes.data.dresses?.map(d => ({ ...d, type: 'dress' })) || []),

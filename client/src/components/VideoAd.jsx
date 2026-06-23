@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+import API_BASE_URL from '../Config/Api';
 function VideoAds() {
     const [ads, setAds] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -53,7 +53,7 @@ function VideoAds() {
     const fetchVideoAds = async () => {
         try {
             setLoading(true);
-            const response = await axios.get('http://localhost:5000/api/ads');
+            const response = await axios.get(`${API_BASE_URL}/ads`);
             if (response.data.success) {
                 const videoAds = response.data.ads.filter(ad => ad.mediaType === 'video');
                 setAds(videoAds);

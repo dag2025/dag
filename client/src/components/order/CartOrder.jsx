@@ -3,6 +3,7 @@ import { useOrder } from '../../context/OrderContext';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import API_BASE_URL from '../../Config/Api';
 
 import GiftOrder from '../../components/order/GiftOrder';
 import ComboOrder from '../../components/order/ComboOrder';
@@ -89,7 +90,7 @@ const Order = () => {
         const amountToPay = order.finalAmount;
         
         const razorpayRes = await axios.post(
-          'http://localhost:5000/api/orders/create-razorpay-order',
+          `${API_BASE_URL}/orders/create-razorpay-order`,
           { amount: amountToPay },
           { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
         );
@@ -109,7 +110,7 @@ const Order = () => {
           handler: async (response) => {
             try {
               const verifyRes = await axios.post(
-                'http://localhost:5000/api/orders/verify-payment-update',
+                `${API_BASE_URL}/orders/verify-payment-update`,
                 {
                   orderId: order._id,
                   razorpay_order_id: response.razorpay_order_id,

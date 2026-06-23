@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
 import { useWishlist } from '../../context/WishlistContext';
 import Whishlistbanner from '../../assets/wishlist-banner.svg'
+import API_BASE_URL from '../../Config/Api';
 
 function Wishlist() {
   const navigate = useNavigate();

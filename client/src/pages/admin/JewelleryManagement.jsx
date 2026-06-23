@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "../../styles/JewelleryManagement.css";
-
+import API_BASE_URL from "../../Config/Api";
 function JewelleryManagement() {
   // ------------------ VIEW STATE ------------------
   const [activeView, setActiveView] = useState("catalog"); // "catalog", "add", "edit"
@@ -84,7 +84,7 @@ function JewelleryManagement() {
   const fetchJewellery = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get("http://localhost:5000/api/jewellery");
+      const response = await axios.get(`${API_BASE_URL}/jewellery`);
       setJewellery(response.data.jewellery || []);
     } catch (error) {
       console.error("Error fetching jewellery:", error);
@@ -154,7 +154,7 @@ function JewelleryManagement() {
 
     try {
       setLoading(true);
-      const response = await axios.delete(`http://localhost:5000/api/jewellery/${id}`);
+      const response = await axios.delete(`${API_BASE_URL}/jewellery/${id}`);
       
       if (response.data.success) {
         setJewellery(jewellery.filter(item => item._id !== id));
@@ -207,14 +207,14 @@ function JewelleryManagement() {
       
       if (activeView === "edit") {
         response = await axios.put(
-          `http://localhost:5000/api/jewellery/${editId}`,
+          `${API_BASE_URL}/jewellery/${editId}`,
           formData,
           { headers: { "Content-Type": "multipart/form-data" } }
         );
         message = "Jewellery updated successfully!";
       } else {
         response = await axios.post(
-          "http://localhost:5000/api/jewellery",
+          `${API_BASE_URL}/jewellery`,
           formData,
           { headers: { "Content-Type": "multipart/form-data" } }
         );

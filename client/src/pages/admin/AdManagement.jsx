@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import API_BASE_URL from '../../Config/Api';
 function AdsManagement() {
   const [activeTab,setActiveTab]=useState(0);
   const [showTable, setShowTable] = useState(false);
@@ -23,7 +23,7 @@ function AdsManagement() {
 
   const fetchAds = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/ads');
+      const response = await axios.get(`${API_BASE_URL}/ads`);
       if (response.data.success) {
         setAds(response.data.ads);
       }
@@ -34,7 +34,7 @@ function AdsManagement() {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/ads/products');
+      const response = await axios.get(`${API_BASE_URL}/ads/products`);
       if (response.data.success) {
         setProducts(response.data.products);
       }
@@ -69,7 +69,7 @@ function AdsManagement() {
       }
 
       const response = await axios.post(
-        'http://localhost:5000/api/ads',
+        '${API_BASE_URL}/ads',
         formDataToSend,
         { headers: { 'Content-Type': 'multipart/form-data' } }
       );
@@ -91,7 +91,7 @@ function AdsManagement() {
   const handleLinkProduct = async (adId, product) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/ads/${adId}/link-product`,
+        `${API_BASE_URL}/ads/${adId}/link-product`,
         {
           productType: product.type,
           productId: product._id
@@ -114,7 +114,7 @@ function AdsManagement() {
     if (!window.confirm('Are you sure you want to delete this ad?')) return;
 
     try {
-      const response = await axios.delete(`http://localhost:5000/api/ads/${adId}`);
+      const response = await axios.delete(`${API_BASE_URL}/ads/${adId}`);
       if (response.data.success) {
         alert('Ad deleted successfully!');
         fetchAds();

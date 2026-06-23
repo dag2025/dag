@@ -7,7 +7,7 @@ import axios from 'axios';
 import Review from './Review';
 import SizePrediction from '../../AI/SizePrediction';
 import SizeGuide from '../../assets/jewel-size-guide.png';
-
+import API_BASE_URL from '../../Config/Api';
 function ViewJewellery() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -74,7 +74,7 @@ function ViewJewellery() {
   const fetchJewelleryDetails = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:5000/api/jewellery/${id}`);
+      const response = await axios.get(`${API_BASE_URL}/jewellery/${id}`);
       if (response.data.success) {
         setJewellery(response.data.jewellery);
       }
@@ -88,7 +88,7 @@ function ViewJewellery() {
 
   const fetchRelatedProducts = async (category) => {
     try {
-      const response = await axios.get('http://localhost:5000/api/jewellery');
+      const response = await axios.get(`${API_BASE_URL}/jewellery`);
       if (response.data.success) {
         const related = response.data.jewellery
           .filter(j => j.category === category && j._id !== id)
@@ -125,7 +125,7 @@ function ViewJewellery() {
     setAddingToCart(true);
     try {
       const response = await axios.post(
-        'http://localhost:5000/api/cart/add',
+        `${API_BASE_URL}/cart/add`,
         {
           productType: 'jewellery',
           productId: jewellery._id,

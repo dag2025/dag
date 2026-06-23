@@ -7,6 +7,8 @@ import axios from 'axios';
 import Review from './Review';
 import SizePrediction from '../../AI/SizePrediction';
 import DressSizeGuide from '../../assets/dress-size-guide.png';
+import API_BASE_URL from '../../Config/Api';
+
 function ViewDress() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -87,7 +89,7 @@ function ViewDress() {
   const fetchDressDetails = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:5000/api/dresses/${id}`);
+      const response = await axios.get(`${API_BASE_URL}/dresses/${id}`);
       if (response.data.success) {
         setDress(response.data.dress);
       }
@@ -101,7 +103,7 @@ function ViewDress() {
 
   const fetchRelatedProducts = async (category) => {
     try {
-      const response = await axios.get('http://localhost:5000/api/dresses');
+      const response = await axios.get(`${API_BASE_URL}/dresses`);
       if (response.data.success) {
         const related = response.data.dresses
           .filter(d => d.category === category && d._id !== id)
@@ -154,7 +156,7 @@ function ViewDress() {
     setAddingToCart(true);
     try {
       const response = await axios.post(
-        'http://localhost:5000/api/cart/add',
+        `${API_BASE_URL}/cart/add`,
         {
           productType: 'dress',
           productId: dress._id,

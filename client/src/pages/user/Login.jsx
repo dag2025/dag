@@ -4,6 +4,8 @@ import axios from 'axios';
 import backgroundVideo from '../../assets/background.mp4';
 import { useAuth } from '../../context/AuthContext';
 
+import API_BASE_URL from '../../Config/Api';
+
 function Login() {
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -64,7 +66,7 @@ function Login() {
 
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', {
+      const response = await axios.post(`${API_BASE_URL}/auth/login`, {
         email: formData.email,
         password: formData.password
       });
@@ -105,7 +107,7 @@ function Login() {
     setForgotLoading(true);
     setForgotMessage({ type: '', text: '' });
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/forgot-password', {
+      const response = await axios.post(`${API_BASE_URL}/auth/forgot-password`, {
         email: forgotEmail
       });
       if (response.data.success) {
@@ -141,7 +143,7 @@ function Login() {
     setForgotLoading(true);
     setForgotMessage({ type: '', text: '' });
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/reset-password', {
+      const response = await axios.post(`${API_BASE_URL}/auth/reset-password`, {
         email: forgotEmail,
         otp: otp,
         newPassword: newPassword

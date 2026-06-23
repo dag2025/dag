@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import backgroundVideo from '../../assets/background.mp4';
 import axios from 'axios';
-
+import API_BASE_URL from '../../Config/Api';
 function SignUp() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -103,7 +103,7 @@ function SignUp() {
 
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/signup', {
+      const response = await axios.post(`${API_BASE_URL}/auth/signup`, {
         name: formData.name,
         email: formData.email,
         password: formData.password

@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 import Boat from '../assets/AI.svg';
 import '../styles/Chat.css';
+import API_BASE_URL from '../Config/Api';
 
 function AIChat() {
   const { token } = useAuth();
@@ -42,7 +43,7 @@ function AIChat() {
         content: m.content
       }));
 
-      const res = await axios.post('http://localhost:5000/api/ai/chat', {
+      const res = await axios.post(`${API_BASE_URL}/ai/chat`, {
         message: input,
         conversationHistory
       }, {

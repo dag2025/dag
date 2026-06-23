@@ -8,7 +8,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
-
+import API_BASE_URL from '../Config/Api';
 // ════════════════════════════════════════════════════════════
 //  GLOBAL SIZE CHARTS  (Internationally accepted standards)
 // ════════════════════════════════════════════════════════════
@@ -431,7 +431,7 @@ const SizePrediction = ({
         console.log('Product:', productId, '|', productType, '|', productCategory);
 
         // 1. Orders (we need ALL delivered orders to search by productId)
-        const ordersRes = await axios.get('http://localhost:5000/api/orders/my-orders', {
+        const ordersRes = await axios.get(`${API_BASE_URL}/orders/my-orders`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const allOrders = ordersRes.data?.success ? ordersRes.data.orders : [];
@@ -447,7 +447,7 @@ const SizePrediction = ({
         });
 
         // 2. Fit feedback history
-        const feedbackRes = await axios.get('http://localhost:5000/api/size/feedback/history', {
+        const feedbackRes = await axios.get(`${API_BASE_URL}/size/feedback/history`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (feedbackRes.data?.success) {
@@ -460,7 +460,7 @@ const SizePrediction = ({
         }
 
         // 3. User measurements
-        const measureRes = await axios.get('http://localhost:5000/api/size/measurements', {
+        const measureRes = await axios.get(`${API_BASE_URL}/size/measurements`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (measureRes.data?.success && measureRes.data.measurements) {
@@ -762,7 +762,7 @@ const SizePrediction = ({
     console.log('💾 [SizePrediction] Saving measurements:', JSON.stringify(payload, null, 2));
 
     try {
-      await axios.put('http://localhost:5000/api/size/measurements', payload, {
+      await axios.put(`${API_BASE_URL}/size/measurements`, payload, {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log('✅ Measurements saved successfully');
@@ -789,7 +789,7 @@ const SizePrediction = ({
       category: productCategory,
     });
     try {
-      await axios.post('http://localhost:5000/api/size/detailed-feedback', {
+      await axios.post(`${API_BASE_URL}/size/detailed-feedback`, {
         productId,
         productType,
         size:         selectedSize.size,

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
+import API_BASE_URL from "../Config/Api";
 // ==================== DEBUG SETUP ====================
 const DEBUG = true;
 
@@ -35,7 +35,7 @@ export function BestOfferForDress() {
         try {
             setLoading(true);
             const [dressesRes] = await Promise.all([
-                axios.get('http://localhost:5000/api/dresses')
+                axios.get(`${API_BASE_URL}/dresses`)
             ]);
 
             debugLog('BestOfferForDress', 'API Response:', dressesRes.data);
@@ -474,7 +474,7 @@ export function BestOfferForJewel() {
         try {
             setLoading(true);
             const [jewelleryRes] = await Promise.all([
-                axios.get('http://localhost:5000/api/jewellery')
+                axios.get(`${API_BASE_URL}/jewellery`)
             ]);
 
             debugLog('BestOfferForJewel', 'API Response:', jewelleryRes.data);

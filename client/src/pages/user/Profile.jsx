@@ -7,6 +7,8 @@ import { CartProvider } from '../../context/CartContext';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+import API_BASE_URL from '../../Config/Api';
+
 import Cart from './Cart';
 import Wishlist from './Wishlist';
 import Order from './Order';
@@ -30,18 +32,18 @@ const Profile = React.memo(() => {
     try {
       setLoading(true);
       // Fetch orders
-      const ordersRes = await axios.get('http://localhost:5000/api/orders/my-orders', {
+      const ordersRes = await axios.get(`${API_BASE_URL}/orders/my-orders`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const orders = ordersRes.data.orders || [];
       
       // Fetch wishlist
-      const wishlistRes = await axios.get('http://localhost:5000/api/wishlist', {
+      const wishlistRes = await axios.get(`${API_BASE_URL}/wishlist`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
       // Fetch cart
-      const cartRes = await axios.get('http://localhost:5000/api/cart', {
+      const cartRes = await axios.get(`${API_BASE_URL}/cart`, {
         headers: { Authorization: `Bearer ${token}` }
       });
 

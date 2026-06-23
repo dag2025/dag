@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import API_BASE_URL from '../Config/Api';
 const NewArrivalsJewellery = () => {
   const [jewellery, setJewellery] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -14,7 +14,7 @@ const NewArrivalsJewellery = () => {
   const fetchNewArrivals = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/jewellery');
+      const response = await axios.get(`${API_BASE_URL}/jewellery`);
       
       if (response.data.success) {
         // Sort by createdAt (newest first) and take first 10

@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useAuth } from './AuthContext';
 import axios from 'axios';
+import API_BASE_URL from '../Config/Api';
 
 const OrderContext = createContext();
 
@@ -25,7 +26,7 @@ export const OrderProvider = ({ children }) => {
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const res = await axios.get('http://localhost:5000/api/orders/my-orders', {
+      const res = await axios.get(`${API_BASE_URL}/orders/my-orders`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (res.data.success) {
@@ -42,7 +43,7 @@ export const OrderProvider = ({ children }) => {
 
   const cancelEntireOrder = async (orderId) => {
     try {
-      const res = await axios.put(`http://localhost:5000/api/orders/${orderId}/cancel`, {}, {
+      const res = await axios.put(`${API_BASE_URL}/orders/${orderId}/cancel`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (res.data.success) {
@@ -56,7 +57,7 @@ export const OrderProvider = ({ children }) => {
 
   const returnOrder = async (orderId, reason) => {
     try {
-      const res = await axios.post(`http://localhost:5000/api/orders/${orderId}/return`, { reason }, {
+      const res = await axios.post(`${API_BASE_URL}/orders/${orderId}/return`, { reason }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (res.data.success) {
@@ -70,7 +71,7 @@ export const OrderProvider = ({ children }) => {
 
   const updateAddress = async (orderId, address) => {
     try {
-      const res = await axios.put(`http://localhost:5000/api/orders/${orderId}/address`, address, {
+      const res = await axios.put(`${API_BASE_URL}/orders/${orderId}/address`, address, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (res.data.success) {
@@ -84,7 +85,7 @@ export const OrderProvider = ({ children }) => {
 
   const updateGiftDetails = async (orderId, giftDetails) => {
     try {
-      const res = await axios.put(`http://localhost:5000/api/orders/${orderId}/gift-details`, giftDetails, {
+      const res = await axios.put(`${API_BASE_URL}/orders/${orderId}/gift-details`, giftDetails, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (res.data.success) {
@@ -98,7 +99,7 @@ export const OrderProvider = ({ children }) => {
 
   const updatePaymentMethod = async (orderId, paymentMethod) => {
     try {
-      const res = await axios.put(`http://localhost:5000/api/orders/${orderId}/payment-method`, 
+      const res = await axios.put(`${API_BASE_URL}/orders/${orderId}/payment-method`, 
         { paymentMethod },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -113,7 +114,7 @@ export const OrderProvider = ({ children }) => {
 
   const cancelOrderItem = async (orderId, itemId) => {
     try {
-      const res = await axios.put(`http://localhost:5000/api/orders/${orderId}/cancel-item`, 
+      const res = await axios.put(`${API_BASE_URL}/orders/${orderId}/cancel-item`, 
         { itemId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -128,7 +129,7 @@ export const OrderProvider = ({ children }) => {
 
   const deleteReturnRequest = async (orderId) => {
     try {
-      const res = await axios.delete(`http://localhost:5000/api/orders/${orderId}/return`, {
+      const res = await axios.delete(`${API_BASE_URL}/orders/${orderId}/return`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (res.data.success) {

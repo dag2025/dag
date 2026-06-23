@@ -4,6 +4,8 @@ import OutfitRecommendations from '../../AI/OutfitRecommendation';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
+import API_BASE_URL from '../../Config/Api';
+
 function Search() {
   const { isAuthenticated, token } = useAuth();
   const [index, setIndex] = useState(0);
@@ -105,8 +107,8 @@ function Search() {
   const fetchAvailableFilters = async () => {
     try {
       const [dressesRes, jewelleryRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/dresses'),
-        axios.get('http://localhost:5000/api/jewellery')
+        axios.get(`${API_BASE_URL}/dresses`),
+        axios.get(`${API_BASE_URL}/jewellery`)
       ]);
 
       const allProducts = [
@@ -126,7 +128,7 @@ function Search() {
 
   const fetchSearchHistory = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/search/history', {
+      const res = await axios.get(`${API_BASE_URL}/search/history`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (res.data.success) {
@@ -144,7 +146,7 @@ function Search() {
     setOrdersLoading(true);
     try {
       // 1. Fetch orders
-      const ordersRes = await axios.get('http://localhost:5000/api/orders/my-orders', {
+      const ordersRes = await axios.get(`${API_BASE_URL}/orders/my-orders`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -165,8 +167,8 @@ function Search() {
 
       // 2. Fetch all dresses and jewellery (for recommendations)
       const [dressesRes, jewelleryRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/dresses'),
-        axios.get('http://localhost:5000/api/jewellery')
+        axios.get('${API_BASE_URL}/dresses'),
+        axios.get('${API_BASE_URL}/jewellery')
       ]);
       
       const dresses = dressesRes.data.dresses || [];
@@ -245,7 +247,7 @@ function Search() {
     setLoading(true);
     try {
       const params = new URLSearchParams({ q: searchQuery, ...filters });
-      const res = await axios.get(`http://localhost:5000/api/search?${params}`, {
+      const res = await axios.get(`${API_BASE_URL}/search?${params}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -272,7 +274,7 @@ function Search() {
   const clearHistory = useCallback(async () => {
     if (!window.confirm('Clear search history?')) return;
     try {
-      await axios.delete('http://localhost:5000/api/search/history', {
+      await axios.delete(`${API_BASE_URL}/search/history`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setSearchHistory([]);

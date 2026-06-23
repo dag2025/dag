@@ -6,6 +6,8 @@ import { BestOfferForJewel } from '../../components/BestOffers';
 import NewArrivalsJewellery from '../../components/NewArrivalsJewellery';
 import '../../styles/Product.css'; // Using the same CSS as Dress component
 
+import API_BASE_URL from '../../Config/Api';
+
 function Jewellery() {
   const [jewellery, setJewellery] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -18,7 +20,7 @@ function Jewellery() {
   const fetchJewellery = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/jewellery');
+      const response = await axios.get(`${API_BASE_URL}/jewellery`);
       console.log('API Response:', response.data); // Debug log
       
       if (response.data.success) {

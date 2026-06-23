@@ -6,6 +6,8 @@ import orderbanner from '../../assets/order-banner.svg';
 import axios from 'axios';
 import '../../styles/Order.css'
 
+import API_BASE_URL from '../../Config/Api';
+
 const STATUS_STEPS = ["Placed", "Confirmed", "Shipped", "Delivered"];
 const TOOLTIPS = [
   "Order placed successfully",
@@ -150,7 +152,7 @@ function Order() {
     if (!window.confirm('Are you sure you want to delete this return request?')) return;
     try {
       const res = await axios.delete(
-        `http://localhost:5000/api/orders/${selectedOrder._id}/return`,
+        `${API_BASE_URL}/orders/${selectedOrder._id}/return`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (res.data.success) {
@@ -219,7 +221,7 @@ function Order() {
         const amountToPay = selectedOrder.finalAmount;
         
         const razorpayRes = await axios.post(
-          'http://localhost:5000/api/orders/create-razorpay-order',
+          '${API_BASE_URL}/orders/create-razorpay-order',
           { amount: amountToPay },
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -244,7 +246,7 @@ function Order() {
           handler: async (response) => {
             try {
               const verifyRes = await axios.post(
-                'http://localhost:5000/api/orders/verify-payment-update',
+                `${API_BASE_URL}/orders/verify-payment-update`,
                 {
                   orderId: selectedOrder._id,
                   razorpay_order_id: response.razorpay_order_id,

@@ -6,6 +6,8 @@ import NewArrivalsDress from '../../components/NewArrivalsDress';
 import VideoAds from '../../components/VideoAd';
 import '../../styles/Product.css';
 
+import API_BASE_URL from '../../Config/Api';
+
 function Dress() {
   const [dresses, setDresses] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -18,7 +20,7 @@ function Dress() {
   const fetchDresses = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/dresses');
+      const response = await axios.get(`${API_BASE_URL}/dresses`);
       if (response.data.success) {
         setDresses(response.data.dresses || []);
       }

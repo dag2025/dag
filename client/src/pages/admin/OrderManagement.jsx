@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import axios from 'axios';
+import API_BASE_URL from '../../Config/Api';
 
 function OrderManagement() {
   const { token } = useAuth();
@@ -40,7 +41,7 @@ function OrderManagement() {
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const res = await axios.get('http://localhost:5000/api/admin/orders', {
+      const res = await axios.get(`${API_BASE_URL}/admin/orders`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (res.data.success) {
@@ -114,7 +115,7 @@ function OrderManagement() {
 
   const handleStatusUpdate = async (orderId, newStatus) => {
     try {
-      const res = await axios.put(`http://localhost:5000/api/admin/orders/${orderId}/status`, 
+      const res = await axios.put(`${API_BASE_URL}/admin/orders/${orderId}/status`, 
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -131,7 +132,7 @@ function OrderManagement() {
     if (!returnAction.orderId || !returnAction.action) return;
 
     try {
-      const res = await axios.post(`http://localhost:5000/api/admin/orders/${returnAction.orderId}/process-return`,
+      const res = await axios.post(`${API_BASE_URL}/admin/orders/${returnAction.orderId}/process-return`,
         { 
           approve: returnAction.action === 'approve',
           reason: returnAction.reason 
@@ -152,7 +153,7 @@ function OrderManagement() {
     if (!selectedOrderId || !cancelReason) return;
     
     try {
-      const res = await axios.post(`http://localhost:5000/api/admin/orders/${selectedOrderId}/cancel`, 
+      const res = await axios.post(`${API_BASE_URL}/admin/orders/${selectedOrderId}/cancel`, 
         { reason: cancelReason },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -171,7 +172,7 @@ function OrderManagement() {
     if (!window.confirm('Are you sure you want to delete this order?')) return;
     
     try {
-      const res = await axios.delete(`http://localhost:5000/api/admin/orders/${orderId}`, {
+      const res = await axios.delete(`${API_BASE_URL}/admin/orders/${orderId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (res.data.success) {
