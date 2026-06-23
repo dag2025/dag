@@ -15,5 +15,15 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: false,
+     cssMinify: 'esbuild',
+    rollupOptions: {
+      external: [], // Don't externalize anything
+      resolve: {
+        dedupe: ['react', 'react-dom'] // Ensure single React instance
+      }
+    }
+  },
+  resolve: {
+    dedupe: ['react', 'react-dom', 'react-bootstrap']
   }
 });
