@@ -35,14 +35,13 @@ const app = express();
 // 1. Helmet - Sets various HTTP headers for security
 app.use(helmet());
 
-// 2. CORS Configuration - Allow specific origins
+// Update the allowed origins
 const allowedOrigins = [
   'http://localhost:3000',
   'http://localhost:5173',
-  'https://dag-client.vercel.app',
-  'https://dag-client-git-main.vercel.app',
-  // Add your custom domain if any
-  // 'https://yourdomain.com'
+  'https://dag-pied.vercel.app',        // ← ADD YOUR VERCEL URL
+  'https://dag-client.vercel.app',      // ← Also add the standard one
+  // Add any other domains you use
 ];
 
 app.use(cors({
@@ -53,14 +52,13 @@ app.use(cors({
     if (allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
+      console.log('❌ CORS blocked:', origin); // Log blocked origins
       callback(new Error(`CORS blocked: ${origin} not allowed`));
     }
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
-  exposedHeaders: ['Content-Range', 'X-Content-Range'],
-  maxAge: 600 // 10 minutes
 }));
 
 // 3. Rate Limiting - Prevent brute force attacks
