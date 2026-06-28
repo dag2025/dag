@@ -58,7 +58,7 @@ app.use(cors({
 // 3. Rate Limiting - Prevent brute force (KEEP THIS)
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100,
+  max: 1000,
   message: 'Too many requests, please try again later.',
   standardHeaders: true,
   legacyHeaders: false,
@@ -68,7 +68,7 @@ app.use(limiter);
 // Stricter rate limit for auth routes
 const authLimiter = rateLimit({
   windowMs: 60 * 60 * 1000,
-  max: 10,
+  max: 30,
   message: 'Too many authentication attempts, please try again after 1 hour',
   standardHeaders: true,
   legacyHeaders: false,
