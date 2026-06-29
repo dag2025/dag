@@ -86,12 +86,13 @@ function Navbar() {
 </li>
         </ul>
 
-        {/* Logo */}
-        <div className="flex-grow-1 text-center">
-          <Link to="/">
-            <img src={Logo} alt="Logo" style={{ height: '40px' }} className="mx-auto d-block logo" />
-          </Link>
-        </div>
+     
+{/* Logo */}
+<div className="text-center logo-container">
+  <Link to="/">
+    <img src={Logo} alt="Logo" style={{ height: '40px' }} className="mx-auto d-block logo" />
+  </Link>
+</div>
 
         {/* Right Menu */}
         <ul className="d-flex list-unstyled gap-3 mb-0 align-items-center">

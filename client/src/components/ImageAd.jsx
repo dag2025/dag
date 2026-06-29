@@ -639,7 +639,7 @@ function ImageAd() {
                 </div>
                 <div className="col">
                 <div className="product-details">
-                  <p className="product-name">{currentAd.productDetails.name}</p>
+                  <p className="product-name ">{currentAd.productDetails.name}</p>
                   <p className="product-category">{currentAd.productDetails.category}</p>
                   <div className="product-price">
                     <span className="current-price">

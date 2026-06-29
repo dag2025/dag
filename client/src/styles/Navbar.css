@@ -21,7 +21,24 @@ header {
         transform: translateY(0);
     }
 }
+nav.container-fluid {
+    position: relative;
+}
+/* Force the logo container to be exactly in the center of the screen */
+.logo-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1; /* Ensures it stays visible */
+}
 
+/* Prevent overlapping if buttons get too wide on small screens */
+@media (max-width: 400px) {
+    .logo img {
+        height: 32px !important; /* Slightly scale down logo on very small devices */
+    }
+}
 /* Main content padding to account for fixed header */
 body {
     padding-top: 94px; /* Header height */

@@ -200,7 +200,7 @@ function VideoAds() {
                 {`
                 .video-ads-container {
                     background: linear-gradient(135deg, #fdfcfb 0%, #f7f7f7 100%);
-                    min-height: 100vh;
+                    min-height: fit-content;
                     padding: 5px ;
                     max-width: 98%;
                    
@@ -547,11 +547,11 @@ function VideoAds() {
                     </h2>
                     <p className="section-subtitle">Discover products through engaging video stories</p>
                     
-                    <div className="video-scroll-wrapper">
+                    <div className="video-scroll-wrapper pb-3">
                         {ads.map((ad) => (
                             <div 
                                 key={ad._id}
-                                className={`video-card ${zoomedId === ad._id ? 'zoomed' : ''}`}
+                                className={`video-card  ${zoomedId === ad._id ? 'zoomed' : ''}`}
                                 onClick={() => handleVideoClick(ad._id)}
                             >
                                 <div className="video-wrapper">

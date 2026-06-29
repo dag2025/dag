@@ -14,6 +14,7 @@ import Image2 from "../../assets/img2.png";
 import Image3 from "../../assets/img3.png";
 import Image4 from "../../assets/img4.png";
 import Image5 from "../../assets/img5.png";
+import Vad, { Iad } from '../../components/Ad'
 import '../../styles/Home.css';
 
 function Home() {
@@ -33,17 +34,23 @@ function Home() {
   }, [images.length]);
 
   return (
-    <div className="container-fluid mb-3 ">
+    <div className=" mb-3 ">
       <div className="image-ad">
         <ImageAd />
       </div>
 
-      <div className="p-2">
+      <div className="p-2 container-fluid">
+        <div>
+          <Vad/>
+        </div>
         <BestSellers />
         <div className="mt-2 mb-2">
           <img src={JewellweyBanner} alt="Jewellery-Banner" className="img-fluid Jewellery-Banner" style={{ borderRadius: '0px' }} />
         </div>
         <BestOfferForJewel />
+        <div>
+  <Iad/>
+        </div>
         <NewArrivalsJewellery />
         
         <VideoAds />
@@ -52,8 +59,11 @@ function Home() {
           <img src={DressBanner} alt="Dress-Banner" className="img-fluid Dress-Banner" style={{ borderRadius: '0px' }} />
         </div>
         <BestOfferForDress />
+        <div>
+          <Vad/>
+        </div>
         <NewArrivalsDress />
-
+<Iad/>
         <OutfitRecommendations />
         <AIChat />
 

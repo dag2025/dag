@@ -239,29 +239,28 @@ const DressManagement = React.memo(() => {
     <div className="dress-management container-fluid mt-4">
       <h2 className="text-center mb-4 text-uppercase" style={{ color: "#000000" }}>Dress Management System</h2>
 
-      {/* TABS */}
-      <div className="d-flex justify-content-between gap-3 mb-4">
-        <button
-          className={`btn ${activeView === "catalog" ? "btn-dark" : "btn-outline-dark"}`}
-          style={activeView === "catalog" ? { backgroundColor: "#ed3545", borderColor: "#ed3545" } : {}}
-          onClick={() => { setActiveView("catalog"); setActiveTab(0); }}
-       
-        >
-           Dress Catalog
-        </button>
-        <button
-          className={`btn ${activeView === "add" ? "btn-dark" : "btn-outline-dark"}`}
-          style={activeView === "add" ? { backgroundColor: "#ed3545", borderColor: "#ed3545" } : {}}
-        onClick={() => { resetForm(); setActiveView("add"); setActiveTab(1); }}
-        >
-         Add New Dress
-        </button>
-        {activeView === "edit" && activeTab === 2 && (
-          <button className="btn btn-warning" disabled>
-            <i className="bi bi-pencil text-dark"></i>
-          </button>
-        )}
-      </div>
+ {/* TABS */}
+<div className="d-flex justify-content-between gap-3 mb-4">
+  <button
+    className={`btn ${activeView === "catalog" ? "btn-dark" : "btn-outline-dark"}`}
+    style={activeView === "catalog" ? { backgroundColor: "#ed3545", borderColor: "#ed3545" } : {}}
+    onClick={() => { setActiveView("catalog"); setActiveTab(0); }}
+  >
+    Dress Catalog
+  </button>
+  <button
+    className={`btn ${activeView === "add" ? "btn-dark" : "btn-outline-dark"}`}
+    style={activeView === "add" ? { backgroundColor: "#ed3545", borderColor: "#ed3545" } : {}}
+    onClick={() => { resetForm(); setActiveView("add"); setActiveTab(1); }}
+  >
+    Add New Dress
+  </button>
+  {activeView === "edit" && activeTab === 2 && (
+    <button className="btn btn-warning" disabled>
+      <i className="bi bi-pencil text-dark"></i>
+    </button>
+  )}
+</div>
 
       {/* ERROR ALERT */}
       {error && (
@@ -272,7 +271,7 @@ const DressManagement = React.memo(() => {
       )}
 
       {/* ADD/EDIT FORM */}
-    {(activeView === "add" && activeTab === 1) || (activeView === "edit" && activeTab === 2) && (
+{((activeView === "add" && activeTab === 1) || (activeView === "edit" && activeTab === 2)) && (
   // form JSX
         <div className="card mb-4 shadow-sm">
           <div className="card-header bg-white border-bottom">

@@ -167,8 +167,8 @@ function Search() {
 
       // 2. Fetch all dresses and jewellery (for recommendations)
       const [dressesRes, jewelleryRes] = await Promise.all([
-        axios.get('${API_BASE_URL}/dresses'),
-        axios.get('${API_BASE_URL}/jewellery')
+        axios.get(`${API_BASE_URL}/dresses`),
+        axios.get(`${API_BASE_URL}/jewellery`)
       ]);
       
       const dresses = dressesRes.data.dresses || [];
